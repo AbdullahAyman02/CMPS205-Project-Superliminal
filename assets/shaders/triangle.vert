@@ -16,5 +16,27 @@ out Varyings {
 
 //TODO: (Req 1) Finish this shader
 
+uniform vec2 translation = vec2(0.0, 0.0);
+uniform vec2 scale = vec2(1.0, 1.0);
+
 void main(){
+    vec3 positions[3] = vec3[3](
+        vec3(-0.5, -0.5, 0.0),
+        vec3( 0.5, -0.5, 0.0),
+        vec3( 0.0,  0.5, 0.0)
+    );
+
+    vec3 colors[3] = vec3[3](
+        vec3(1.0, 0.0, 0.0),
+        vec3(0.0, 1.0, 0.0),
+        vec3(0.0, 0.0, 1.0)
+    );
+
+    vec3 transformed_positions[3];
+    for(int i = 0; i < 3; i++){
+        transformed_positions[i] = vec3(scale * positions[i].xy + translation, positions[i].z);
+    }
+
+    gl_Position = vec4(transformed_positions[gl_VertexID], 1.0);
+    vs_out.color = colors[gl_VertexID];
 }

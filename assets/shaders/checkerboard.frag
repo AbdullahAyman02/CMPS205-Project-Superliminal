@@ -12,5 +12,11 @@ uniform int size = 32;
 uniform vec3 colors[2];
 
 void main(){
-    frag_color = vec4(colors[0], 1.0);
+    // The position of the tile in the grid.
+    ivec2 position = ivec2(gl_FragCoord.xy) / size;
+
+    // The color of the tile is determined by the sum of the x and y position of the tile. Odd sum means color[1], even means color[0].
+    vec3 color = colors[(position.x + position.y) % 2];
+
+    frag_color = vec4(color, 1.0);
 }

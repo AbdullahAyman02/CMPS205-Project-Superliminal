@@ -26,6 +26,29 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const 
     // compilation error and print it so that you can know what is wrong with
     // the shader. The returned string will be empty if there is no errors.
 
+    //Create a shader object
+    GLuint shader = glCreateShader(type);
+
+    //Attach the shader source code to the shader object
+    glShaderSource(shader, 1, &sourceCStr, nullptr);
+
+    //Compile the shader
+    glCompileShader(shader);
+
+    //Check for compilation errors
+    std::string error = checkForShaderCompilationErrors(shader);
+    if (!error.empty()) {
+        std::cerr << "ERROR: Shader Compilation Error: " << error << std::endl;
+        glDeleteShader(shader);
+        return false;
+    }
+
+    //Attach the shader to the program
+    glAttachShader(program, shader);
+
+    //Delete the shader object -> COMMENT: Should I delete the shader object here?
+    glDeleteShader(shader);
+
     //We return true if the compilation succeeded
     return true;
 }
@@ -39,6 +62,17 @@ bool our::ShaderProgram::link() const {
     // linking error and print it so that you can know what is wrong with the
     // program. The returned string will be empty if there is no errors.
 
+    //Link the shader program
+    glLinkProgram(program);
+
+    //Check for linking errors
+    std::string error = checkForLinkingErrors(program);
+    if (!error.empty()) {
+        std::cerr << "ERROR: Shader Linking Error: " << error << std::endl;
+        return false;
+    }
+
+    //We return true if the linking succeeded
     return true;
 }
 
