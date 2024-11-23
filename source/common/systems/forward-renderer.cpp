@@ -53,13 +53,17 @@ namespace our {
         // Then we check if there is a postprocessing shader in the configuration
         if(config.contains("postprocess")){
             //TODO: (Req 11) Create a framebuffer
-
+            glGenFramebuffers(1, &this->postprocessFrameBuffer);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->postprocessFrameBuffer);
             //TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             // Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             // The depth format can be (Depth component with 24 bits).
-            
+            colorTarget = texture_utils::empty(GL_RGB8, windowSize);
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,colorTarget->getOpenGLName(),  0);
+            depthTarget = texture_utils::empty(GL_DEPTH_COMPONENT24_SGIX, windowSize);
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,depthTarget->getOpenGLName(),  0);
             //TODO: (Req 11) Unbind the framebuffer just to be safe
-
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
             // Create a vertex array to use for drawing the texture
             glGenVertexArrays(1, &postProcessVertexArray);
 
@@ -161,7 +165,7 @@ namespace our {
         // If there is a postprocess material, bind the framebuffer
         if(postprocessMaterial){
             //TODO: (Req 11) bind the framebuffer
-            
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->postprocessFrameBuffer);
         }
 
         //TODO: (Req 9) Clear the color and depth buffers
@@ -180,14 +184,14 @@ namespace our {
             //TODO: (Req 10) setup the sky material
             this->skyMaterial->setup();
             //TODO: (Req 10) Get the camera position
-            glm::mat4 cameraPosition = camera->getOwner()->getLocalToWorldMatrix();
+            glm::vec4 cameraPosition = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
             //TODO: (Req 10) Create a model matrix for the sy such that it always follows the camera (sky sphere center = camera position)
             // translate sky with camera
            glm::mat4 skyModelMatrix = glm::mat4(
                 1.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 1.0f, 0.0f, 0.0f,
                 0.0f, 0.0f, 1.0f, 0.0f,
-                cameraPosition[3][0], cameraPosition[3][1], cameraPosition[3][2], 1.0f);
+                cameraPosition[0], cameraPosition[1], cameraPosition[2], 1.0f);
             //TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
             // We can acheive the is by multiplying by an extra matrix after the projection but what values should we put in it?
             // [x, y, 1, 1]
@@ -214,9 +218,11 @@ namespace our {
         // If there is a postprocess material, apply postprocessing
         if(postprocessMaterial){
             //TODO: (Req 11) Return to the default framebuffer
-            
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             //TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
-            
+            this->postprocessMaterial->setup();
+            glBindVertexArray(this->postProcessVertexArray);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
         }
     }
 
