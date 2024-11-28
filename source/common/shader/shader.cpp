@@ -5,74 +5,91 @@
 #include <fstream>
 #include <string>
 
-//Forward definition for error checking functions
+// Forward definition for error checking functions
 std::string checkForShaderCompilationErrors(GLuint shader);
 std::string checkForLinkingErrors(GLuint program);
 
-bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const {
+bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const
+{
     // Here, we open the file and read a string from it containing the GLSL code of our shader
     std::ifstream file(filename);
-    if(!file){
+    if (!file)
+    {
         std::cerr << "ERROR: Couldn't open shader file: " << filename << std::endl;
         return false;
     }
     std::string sourceString = std::string(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
-    const char* sourceCStr = sourceString.c_str();
+    const char *sourceCStr = sourceString.c_str();
     file.close();
 
-    //TODO: Complete this function
-    //Note: The function "checkForShaderCompilationErrors" checks if there is
-    // an error in the given shader. You should use it to check if there is a
-    // compilation error and print it so that you can know what is wrong with
-    // the shader. The returned string will be empty if there is no errors.
+    // TODO: Complete this function
+    // Note: The function "checkForShaderCompilationErrors" checks if there is
+    //  an error in the given shader. You should use it to check if there is a
+    //  compilation error and print it so that you can know what is wrong with
+    //  the shader. The returned string will be empty if there is no errors.
 
-    //Create a shader object
+    // Create a shader object
     GLuint shader = glCreateShader(type);
 
-    //Attach the shader source code to the shader object
+    // Attach the shader source code to the shader object
+    /*
+    Parameters
+    shader
+        Specifies the handle of the shader object whose source code is to be replaced.
+    count
+
+        Specifies the number of elements in the string and length arrays.
+    string
+
+        Specifies an array of pointers to strings containing the source code to be loaded into the shader.
+    length
+
+        Specifies an array of string lengths.
+    */
     glShaderSource(shader, 1, &sourceCStr, nullptr);
 
-    //Compile the shader
+    // Compile the shader
     glCompileShader(shader);
 
-    //Check for compilation errors
+    // Check for compilation errors
     std::string error = checkForShaderCompilationErrors(shader);
-    if (!error.empty()) {
+    if (!error.empty())
+    {
         std::cerr << "ERROR: Shader Compilation Error: " << error << std::endl;
         glDeleteShader(shader);
         return false;
     }
 
-    //Attach the shader to the program
+    // Attach the shader to the program
     glAttachShader(program, shader);
 
-    //Delete the shader object -> COMMENT: Should I delete the shader object here?
+    // Delete the shader object
     glDeleteShader(shader);
 
-    //We return true if the compilation succeeded
+    // We return true if the compilation succeeded
     return true;
 }
 
+bool our::ShaderProgram::link() const
+{
+    // TODO: Complete this function
+    // Note: The function "checkForLinkingErrors" checks if there is
+    //  an error in the given program. You should use it to check if there is a
+    //  linking error and print it so that you can know what is wrong with the
+    //  program. The returned string will be empty if there is no errors.
 
-
-bool our::ShaderProgram::link() const {
-    //TODO: Complete this function
-    //Note: The function "checkForLinkingErrors" checks if there is
-    // an error in the given program. You should use it to check if there is a
-    // linking error and print it so that you can know what is wrong with the
-    // program. The returned string will be empty if there is no errors.
-
-    //Link the shader program
+    // Link the shader program
     glLinkProgram(program);
 
-    //Check for linking errors
+    // Check for linking errors
     std::string error = checkForLinkingErrors(program);
-    if (!error.empty()) {
+    if (!error.empty())
+    {
         std::cerr << "ERROR: Shader Linking Error: " << error << std::endl;
         return false;
     }
 
-    //We return true if the linking succeeded
+    // We return true if the linking succeeded
     return true;
 }
 
@@ -80,11 +97,13 @@ bool our::ShaderProgram::link() const {
 // Function to check for compilation and linking error in shaders //
 ////////////////////////////////////////////////////////////////////
 
-std::string checkForShaderCompilationErrors(GLuint shader){
-     //Check and return any error in the compilation process
+std::string checkForShaderCompilationErrors(GLuint shader)
+{
+    // Check and return any error in the compilation process
     GLint status;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-    if (!status) {
+    if (!status)
+    {
         GLint length;
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
         char *logStr = new char[length];
@@ -96,11 +115,13 @@ std::string checkForShaderCompilationErrors(GLuint shader){
     return std::string();
 }
 
-std::string checkForLinkingErrors(GLuint program){
-     //Check and return any error in the linking process
+std::string checkForLinkingErrors(GLuint program)
+{
+    // Check and return any error in the linking process
     GLint status;
     glGetProgramiv(program, GL_LINK_STATUS, &status);
-    if (!status) {
+    if (!status)
+    {
         GLint length;
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
         char *logStr = new char[length];

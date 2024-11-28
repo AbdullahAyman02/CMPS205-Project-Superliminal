@@ -16,27 +16,27 @@ out Varyings {
 
 //TODO: (Req 1) Finish this shader
 
-uniform vec2 translation = vec2(0.0, 0.0);
-uniform vec2 scale = vec2(1.0, 1.0);
+uniform vec2 translation = vec2(0.0, 0.0);  // Default values for translation is 0, 0
+uniform vec2 scale = vec2(1.0, 1.0);    // Default values for scaling is 0, 0
 
 void main(){
     vec3 positions[3] = vec3[3](
         vec3(-0.5, -0.5, 0.0),
         vec3( 0.5, -0.5, 0.0),
         vec3( 0.0,  0.5, 0.0)
-    );
+    );  // Coordinates are (-0.5, -0.5, 0), (0.5, -0.5, 0), (0, 0.5, 0)
 
     vec3 colors[3] = vec3[3](
         vec3(1.0, 0.0, 0.0),
         vec3(0.0, 1.0, 0.0),
         vec3(0.0, 0.0, 1.0)
-    );
+    );`// Colors are R, G, B
 
     vec3 transformed_positions[3];
     for(int i = 0; i < 3; i++){
         transformed_positions[i] = vec3(scale * positions[i].xy + translation, positions[i].z);
-    }
+    }`// For each vertex, scale and translate it accordingly and store the new coordinates in transformed_positions.
 
-    gl_Position = vec4(transformed_positions[gl_VertexID], 1.0);
-    vs_out.color = colors[gl_VertexID];
+    gl_Position = vec4(transformed_positions[gl_VertexID], 1.0);    // Get the coordinates of the point required (gl_VertexID) from the newly set transformed_positions array
+    vs_out.color = colors[gl_VertexID]; //Similarly to the color.
 }
