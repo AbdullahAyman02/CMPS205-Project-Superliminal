@@ -143,18 +143,28 @@ namespace our {
 
         //TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         // HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
+
+        // Getting the camera forward vector by multiplying the camera's local to world matrix by -1 in the z direction
         glm::vec3 cameraForward = camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand& first, const RenderCommand& second){
             //TODO: (Req 9) Finish this function
-            // HINT: the following return should return true "first" should be drawn before "second". 
+            // HINT: the following return should return true "first" should be drawn before "second".
+
+            // Getting the distance of the first and second objects from the camera 
             float distance1 = glm::dot(cameraForward, first.center);
             float distance2 = glm::dot(cameraForward, second.center);
+
+            // If the distance of the first object is greater than the distance of the second object, return true
+            // We sort the objects from farthest to nearest to draw the transparent objects in the correct order
             return distance1 > distance2;
         });
 
         //TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
+        // P * V = PV
+        // PV*p will follow the order going from the world space to the view space then to the projection space (Homogeneous clip space)
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
         //TODO: (Req 9) Set the OpenGL viewport using viewportStart and viewportSize
+        // Lower left corner of the viewport to be (0, 0) and the size of the viewport to be the window size
         glViewport(0, 0, windowSize.x, windowSize.y);
         //TODO: (Req 9) Set the clear color to black and the clear depth to 1
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -174,9 +184,16 @@ namespace our {
         // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         glEnable(GL_DEPTH_TEST);
         for(auto command : opaqueCommands){
+            // Setup the material
             command.material->setup();
+
+            // Calculate the MVP (Projection * View * Model) matrix
             glm::mat4 transform = VP * command.localToWorld;
+            
+            // Set the transform uniform
             command.material->shader->set("transform", transform);
+
+            // Draw the mesh
             command.mesh->draw();
         }
         // If there is a sky material, draw the sky
@@ -209,9 +226,16 @@ namespace our {
         //TODO: (Req 9) Draw all the transparent commands
         // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         for (auto command : transparentCommands) {
+            // Setup the material
             command.material->setup();
+
+            // Calculate the MVP (Projection * View * Model) matrix
             glm::mat4 transform = VP * command.localToWorld;
+
+            // Set the transform uniform
             command.material->shader->set("transform", transform);
+
+            // Draw the mesh
             command.mesh->draw();
         }
 
