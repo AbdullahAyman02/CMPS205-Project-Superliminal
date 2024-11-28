@@ -45,6 +45,7 @@ class EntityTestState: public our::State {
         // Then we compute the VP matrix from the camera
         glm::ivec2 size = getApp()->getFrameBufferSize();
         //TODO: (Req 8) Change the following line to compute the correct view projection matrix 
+        // VP = P * V
         glm::mat4 VP = camera->getProjectionMatrix(size) * camera->getViewMatrix();
 
         for(auto& entity : world.getEntities()){
@@ -53,6 +54,8 @@ class EntityTestState: public our::State {
             if(meshRenderer == nullptr) continue;
             //TODO: (Req 8) Complete the loop body to draw the current entity
             // Then we setup the material, send the transform matrix to the shader then draw the mesh
+            // To prepare the mesh in the context of pipeline state (culling, blending, depth testing and so on) and using the shader and so on.
+            // Then calculate the MVP to draw the mesh in its appropriate location.
             meshRenderer->material->setup();
             meshRenderer->material->shader->set("transform", VP * entity->getLocalToWorldMatrix());
             meshRenderer->mesh->draw();
