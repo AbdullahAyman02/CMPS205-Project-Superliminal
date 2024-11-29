@@ -26,4 +26,5 @@ void main(){
     float green = texture(tex, tex_coord).g;
     float blue = texture(tex, tex_coord_blue).b;
     float opacity = texture(tex, tex_coord).a;
-    frag_color = vec4(red, green, blue, opacity);}
+    frag_color = vec4(red, green, blue, opacity);
+}

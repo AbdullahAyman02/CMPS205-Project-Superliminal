@@ -24,8 +24,10 @@ namespace our {
             // We will draw the sphere from the inside, so what options should we pick for the face culling.
             PipelineState skyPipelineState{};
             skyPipelineState.faceCulling.enabled = true;
+            // since we are drawing the sphere from the inside, we will cull the outside which was the front
             skyPipelineState.faceCulling.culledFace = GL_FRONT;
             skyPipelineState.depthTesting.enabled = true;
+            // to prevent overdrawing on closer opaque objects
             skyPipelineState.depthTesting.function = GL_LEQUAL;
             
             // Load the sky texture (note that we don't need mipmaps since we want to avoid any unnecessary blurring while rendering the sky)
