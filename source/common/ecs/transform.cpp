@@ -12,10 +12,16 @@ namespace our {
         //TODO: (Req 3) Write this function
         glm::mat4 scale_matrix = glm::mat4(1.0f), rotate_matrix = glm::mat4(1.0f), translate_matrix = glm::mat4(1.0f);
 
+        // Right multiplicative: glm::scale( X, vec3 ) = X * glm::scale( Identity, vec3 )
         scale_matrix = glm::scale(scale_matrix, scale);
+
+        // Yaw (Y-axis rotation), Pitch (X-axis rotation), Roll (Z-axis rotation)
         rotate_matrix = glm::yawPitchRoll(rotation.y, rotation.x, rotation.z);
+
+        // glm::translate( X, vec3 ) = X * glm::translate( Identity, vec3 )
         translate_matrix = glm::translate(translate_matrix, position);
 
+        // TRS = Scaling, Rotation then Translation
         return translate_matrix * rotate_matrix * scale_matrix; 
     }
 
