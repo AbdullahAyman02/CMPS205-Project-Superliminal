@@ -44,8 +44,11 @@ namespace our {
             //TODO: (Req 4) Write this function
 
             if(faceCulling.enabled) {
+                // glEnable — enable or disable server-side GL capabilities
                 glEnable(GL_CULL_FACE);
+                // glCullFace - specify whether front- or back-facing facets can be culled
                 glCullFace(faceCulling.culledFace);
+                // glFrontFace — define front- and back-facing polygons
                 glFrontFace(faceCulling.frontFace);
             }
             else glDisable(GL_CULL_FACE);
@@ -53,6 +56,7 @@ namespace our {
 
             if(depthTesting.enabled) {
                 glEnable(GL_DEPTH_TEST);
+                // glDepthFunc — specify the value used for depth buffer comparisons
                 glDepthFunc(depthTesting.function);
             }
             else glDisable(GL_DEPTH_TEST);
@@ -60,13 +64,18 @@ namespace our {
 
             if(blending.enabled) {
                 glEnable(GL_BLEND);
+                // glBlendEquation — specify the equation used for blending
                 glBlendEquation(blending.equation);
+                // glBlendFunc — specify pixel arithmetic (source factor & destination factor)
                 glBlendFunc(blending.sourceFactor, blending.destinationFactor);
+                // glBlendColor - set the "initial" blend color (first destination)
                 glBlendColor(blending.constantColor.r, blending.constantColor.g, blending.constantColor.b, blending.constantColor.a);
             }
             else glDisable(GL_BLEND);
 
+            // glColorMask - enable and disable writing of frame buffer color components
             glColorMask(colorMask.r, colorMask.g, colorMask.b, colorMask.a);
+            // glDepthMask - enable or disable writing into the depth buffer
             glDepthMask(depthMask);
         }
 
