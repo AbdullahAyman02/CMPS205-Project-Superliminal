@@ -7,6 +7,7 @@
 namespace our {
 
     // This class defined an OpenGL sampler
+    // Configures how the texture is accessed.
     class Sampler {
         // The OpenGL object name of this sampler 
         GLuint name;
