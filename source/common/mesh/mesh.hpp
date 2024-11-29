@@ -31,29 +31,42 @@ namespace our {
             //TODO: (Req 2) Write this function
             // remember to store the number of elements in "elementCount" since you will need it for drawing
             // For the attribute locations, use the constants defined above: ATTRIB_LOC_POSITION, ATTRIB_LOC_COLOR, etc
+
+            // Generate and bind to vertex array
             glGenVertexArrays(1, &VAO);
             glBindVertexArray(VAO);
 
+            // Generate and bind to array buffer
             glGenBuffers(1, &VBO);
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+            // Reserve memory for all the vertices in the buffer
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
             
+            // Allocations for the vertex attributes (location)
             glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
 
+            // Allocations for the vertex attributes (color)
             glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)(offsetof(Vertex, color)));
             glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
 
+            // Allocations for the vertex attributes (texture coordinates)
             glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, tex_coord)));
             glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
 
+            // Allocations for the vertex attributes (normal)
             glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, normal)));
             glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
 
+            // Generate and bind to element buffer
             glGenBuffers(1, &EBO);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+            // Reserve memory for all the elements in the buffer
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
 
+            // Store the number of elements
             elementCount = static_cast<GLsizei>(elements.size());
         }
 
@@ -61,14 +74,21 @@ namespace our {
         void draw() 
         {
             //TODO: (Req 2) Write this function
+            // Bind to the vertex array object
             glBindVertexArray(VAO);
+
+            // Draw the mesh
             glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
+            
+            // Unbind from the vertex array object
             glBindVertexArray(0);
         }
 
         // this function should delete the vertex & element buffers and the vertex array object
         ~Mesh(){
             //TODO: (Req 2) Write this function
+
+            // Delete the buffers and vertex array object
             glDeleteBuffers(1, &VBO);
             glDeleteBuffers(1, &EBO);
             glDeleteVertexArrays(1, &VAO);
