@@ -30,5 +30,5 @@ void main(){
         dot(green, vec4(fs_in.color.r, fs_in.color.g, fs_in.color.b, 1.0)),
         dot(blue, vec4(fs_in.color.r, fs_in.color.g, fs_in.color.b, 1.0)),
         1.0
-    );
+    );  // Mix the colours by multiplying the uniforms of RGB into the input colors using dot product and return the result.
 }

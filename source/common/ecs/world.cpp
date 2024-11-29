@@ -9,6 +9,8 @@ namespace our {
         if(!data.is_array()) return;
         for(const auto& entityData : data){
             //TODO: (Req 8) Create an entity, make its parent "parent" and call its deserialize with "entityData".
+            // This is the data that is read from the app.jsonc config.
+            // Parsing the entities together from the json file and linking them like in a tree.
             Entity* entity = add();
             entity->parent = parent;
             entity->deserialize(entityData);
