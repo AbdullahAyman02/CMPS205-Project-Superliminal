@@ -30,12 +30,12 @@ void main(){
         vec3(1.0, 0.0, 0.0),
         vec3(0.0, 1.0, 0.0),
         vec3(0.0, 0.0, 1.0)
-    );`// Colors are R, G, B
+    );// Colors are R, G, B
 
     vec3 transformed_positions[3];
     for(int i = 0; i < 3; i++){
         transformed_positions[i] = vec3(scale * positions[i].xy + translation, positions[i].z);
-    }`// For each vertex, scale and translate it accordingly and store the new coordinates in transformed_positions.
+    }// For each vertex, scale and translate it accordingly and store the new coordinates in transformed_positions.
 
     gl_Position = vec4(transformed_positions[gl_VertexID], 1.0);    // Get the coordinates of the point required (gl_VertexID) from the newly set transformed_positions array
     vs_out.color = colors[gl_VertexID]; //Similarly to the color.
