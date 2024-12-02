@@ -11,16 +11,23 @@ namespace our {
 
         if (!physicsWorld) return;
 
+        // Get the relative position of the rigid body instead of its global position
+        glm::vec3 relative = data.value("relativePosition", glm::vec3(0.0f, 0.0f, 0.0f));
+        relativePosition = r3d::Vector3(relative.x, relative.y, relative.z);
+
+        r3d::Transform transform = this->getOwner()->localTransform.getTransform();
+        transform.setPosition(transform.getPosition() + relativePosition);
+
         // Create the rigid body
-        this->rigidBody = physicsWorld->createRigidBody(this->getOwner()->localTransform.getTransform());
+        this->rigidBody = physicsWorld->createRigidBody(transform);
 
         // First get the type of the rigid body
-        const std::string type = data.value("rb_type", "dynamic");
-        if(type == "dynamic") {
+        const std::string type = data.value("rb_type", "Dynamic");
+        if(type == "Dynamic") {
             rigidBody->setType(r3d::BodyType::DYNAMIC);
-        } else if(type == "static") {
+        } else if(type == "Static") {
             rigidBody->setType(r3d::BodyType::STATIC);
-        } else if(type == "kinematic") {
+        } else if(type == "Kinematic") {
             rigidBody->setType(r3d::BodyType::KINEMATIC);
         }
 
@@ -58,6 +65,16 @@ namespace our {
             // Parse the half extents. The half extents represent the shape of the collider
             const glm::vec3 halfExtents = data.value("halfExtents", glm::vec3(1.0f));
             collisionShape = physicsCommon.createBoxShape(r3d::Vector3(halfExtents.x, halfExtents.y, halfExtents.z));
+        } else if (type == "Sphere Collider") {
+            // Parse the radius
+            const r3d::decimal radius = data.value("radius", 1.0f);
+            collisionShape = physicsCommon.createSphereShape(radius);
+        } else if (type == "Capsule Collider") {
+            // Parse the radius
+            const r3d::decimal radius = data.value("radius", 1.0f);
+            // Parse the height
+            const r3d::decimal height = data.value("height", 1.0f);
+            collisionShape = physicsCommon.createCapsuleShape(radius, height);
         }
 
         // Create the collider
@@ -68,6 +85,7 @@ namespace our {
 
         material.setBounciness(data.value("bounciness", material.getBounciness()));
         material.setFrictionCoefficient(data.value("friction", material.getFrictionCoefficient()));
+        material.setMassDensity(data.value("massDensity", material.getMassDensity()));
 
         // A trigger, is a collider that cannot collide with any other colliders but can only report when it is overlapping with another collider. For instance, consider a game where a player moves around and has to avoid touching some bombs. The player has a rigid body with a capsule collider for instance and the bombs are rigid bodies where each one has a sphere collider.
         collider->setIsTrigger(data.value("isTrigger", false));

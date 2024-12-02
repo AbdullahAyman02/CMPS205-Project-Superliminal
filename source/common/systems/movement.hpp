@@ -31,7 +31,7 @@ namespace our
                 return;
 
             // R3D Physics World has a constant frame rate of 60Hz
-            const float timeStep = 1.0f / 60.0f;
+            const float timeStep = 1.0f / 144.0f;
 
             // Add the time difference in the accumulator
             float accumulator = deltaTime;
@@ -71,11 +71,7 @@ namespace our
                     position_vec += deltaTime * movement->linearVelocity;
 
                     // Convert angular velocity to quaternion derivative
-                    glm::quat angular_velocity_quat = glm::quat(0.0f, movement->angularVelocity.x, movement->angularVelocity.y, movement->angularVelocity.z);
-                    glm::quat orientation_derivative = 0.5f * angular_velocity_quat * orientation_quat;
-
-                    // Update orientation
-                    orientation_quat += deltaTime * orientation_derivative;
+                    orientation_quat += 0.5f * deltaTime * movement->angularVelocity * orientation_quat;
 
                     // Normalize the quaternion
                     orientation_quat = glm::normalize(orientation_quat);
@@ -89,21 +85,24 @@ namespace our
                 RigidBodyComponent *rigidBody = entity->getComponent<RigidBodyComponent>();
                 if (rigidBody)
                 {
+                    r3d::Transform transform = rigidBody->getRigidBody()->getTransform();
+                    transform.setPosition(transform.getPosition() - rigidBody->relativePosition);
+
                     FreeCameraControllerComponent *controller = entity->getComponent<FreeCameraControllerComponent>();
                     if (controller)
                     {
-                        r3d::Transform transform = rigidBody->getRigidBody()->getTransform();
                         r3d::Quaternion q = entity->localTransform.getOrientation();
                         // Update the rigid body's position only, keeping the orientation constant.
                         // I'm still not entirely sure why but it was mentioned in the docs somewhere...
                         transform.setOrientation(q);
-                        entity->localTransform.setTransform(transform);
+
+                        // Set the linear velocity of the rigid body to zeroes except the y direction to allow rotating up and down as well
+                        r3d::Vector3 linearVelocity = rigidBody->getRigidBody()->getLinearVelocity();
+                        linearVelocity.x = 0, linearVelocity.z = 0;
+                        rigidBody->getRigidBody()->setLinearVelocity(linearVelocity);
+                        rigidBody->getRigidBody()->setAngularVelocity(r3d::Vector3(0, 0, 0));
                     }
-                    else
-                    {
-                        // Update the entity's rigid body
-                        entity->localTransform.setTransform(rigidBody->getRigidBody()->getTransform());
-                    }
+                    entity->localTransform.setTransform(transform);
                 }
             }
         }

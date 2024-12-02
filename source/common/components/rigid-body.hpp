@@ -20,6 +20,9 @@ namespace our
         void deserialize_collider(const nlohmann::json &data);
 
     public:
+        // The relative position of the rigid body
+        r3d::Vector3 relativePosition;
+
         // The ID of this component type is "Rigid Body"
         static std::string getID() { return "Rigid Body"; }
 

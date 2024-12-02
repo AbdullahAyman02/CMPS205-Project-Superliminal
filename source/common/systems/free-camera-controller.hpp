@@ -10,6 +10,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
 
@@ -162,7 +163,26 @@ namespace our
             RigidBodyComponent *rigidBody = entity->getComponent<RigidBodyComponent>();
             if (rigidBody && rigidBody->getRigidBody())
             {
-                rigidBody->getRigidBody()->setTransform(entity->localTransform.getTransform());
+
+                glm::quat orientation = rotation;
+
+                glm::vec3 forward = glm::rotate(orientation, glm::vec3(0, 0, -1));
+                forward.y = 0;
+                forward = glm::normalize(forward);
+
+                float angle = glm::acos(glm::dot(forward, glm::vec3(0, 0, -1)));
+                glm::vec3 cross = glm::cross(forward, glm::vec3(0, 0, -1));
+
+                if(cross.y < 0)
+                    angle = -angle;
+
+                glm::quat rotationY = glm::angleAxis(angle, glm::vec3(0, 1, 0));
+                r3d::Quaternion orientationQuat(rotationY.x, rotationY.y, rotationY.z, rotationY.w);
+
+                r3d::Transform transform = rigidBody->getRigidBody()->getTransform();
+                transform.setPosition(entity->localTransform.getPosition() + rigidBody->relativePosition);
+                transform.setOrientation(orientationQuat);
+                rigidBody->getRigidBody()->setTransform(transform);
             }
         }
 
