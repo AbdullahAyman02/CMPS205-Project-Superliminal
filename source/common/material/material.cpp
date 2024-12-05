@@ -79,4 +79,12 @@ namespace our {
         sampler = AssetLoader<Sampler>::get(data.value("sampler", ""));
     }
 
+    void LitMaterial::setup() const {
+        TexturedMaterial::setup();
+    }
+
+    void LitMaterial::deserialize(const nlohmann::json& data){
+        TexturedMaterial::deserialize(data);
+        if(!data.is_object()) return;
+    }
 }

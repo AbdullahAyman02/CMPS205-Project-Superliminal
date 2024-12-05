@@ -188,12 +188,18 @@ namespace our {
         for(auto command : opaqueCommands){
             // Setup the material
             command.material->setup();
-
-            // Calculate the MVP (Projection * View * Model) matrix
-            glm::mat4 transform = VP * command.localToWorld;
             
-            // Set the transform uniform
-            command.material->shader->set("transform", transform);
+            if(dynamic_cast<LitMaterial*>(command.material))
+            {
+                command.material->shader->set("M", command.localToWorld);
+                command.material->shader->set("VP", VP);
+                command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+                r3d::Vector3 camera_position = camera->getOwner()->localTransform.getPosition();
+                command.material->shader->set("camera_position", glm::vec4(camera_position.x, camera_position.y, camera_position.z, 1.0));
+            } else {
+                glm::mat4 transform = VP * command.localToWorld;
+                command.material->shader->set("transform", transform);
+            }
 
             // Draw the mesh
             command.mesh->draw();
@@ -231,11 +237,17 @@ namespace our {
             // Setup the material
             command.material->setup();
 
-            // Calculate the MVP (Projection * View * Model) matrix
-            glm::mat4 transform = VP * command.localToWorld;
-
-            // Set the transform uniform
-            command.material->shader->set("transform", transform);
+            if(dynamic_cast<LitMaterial*>(command.material))
+            {
+                command.material->shader->set("M", command.localToWorld);
+                command.material->shader->set("VP", VP);
+                command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+                r3d::Vector3 camera_position = camera->getOwner()->localTransform.getPosition();
+                command.material->shader->set("camera_position", glm::vec3(camera_position.x, camera_position.y, camera_position.z));
+            } else {
+                glm::mat4 transform = VP * command.localToWorld;
+                command.material->shader->set("transform", transform);
+            }
 
             // Draw the mesh
             command.mesh->draw();
