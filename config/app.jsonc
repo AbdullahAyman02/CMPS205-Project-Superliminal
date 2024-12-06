@@ -147,7 +147,7 @@
                     {
                         "type": "Rigid Body",       // rigid body component for the player to allow collisions and physics interactions
                         "rb_type": "Dynamic",       // static body for the floor, a kinematic body for a moving platform and a dynamic body for a rock that could fall on the floor.
-                        "enableGravity": true,      // enable gravity for the player (default is true)
+                        "enableGravity": false,      // enable gravity for the player (default is true)
                         "allowedToSleep": false,    // sleeping technique is used to disable the simulation of resting bodies.
                         "rotationAxis": [1, 1, 1],
                         "motionAxis": [1, 1, 1],
@@ -178,6 +178,7 @@
                 ]
             },
             {
+                "position": [0, -1, 0],
                 "rotation": [-45, 0, 0],
                 "components": [
                     {
@@ -212,101 +213,101 @@
                         }
                     }
                 ]
-            },
-            {
-                "position": [0, 1, 2],
-                "rotation": [0, 0, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    },
-                    {
-                        "type": "Rigid Body",
-                        "rb_type": "Static",
-                        "collider": {
-                            "type": "Box Collider",
-                            "halfExtents": [2, 2, 0.01],
-                            "bounciness": 0.0
-                        }
-                    }
-                ]
-            },
-            {
-                "position": [0, 1, -2],
-                "rotation": [0, 0, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [2, 1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    },
-                    {
-                        "type": "Rigid Body",
-                        "rb_type": "Static",
-                        "collider": {
-                            "type": "Box Collider",
-                            "halfExtents": [2, 2, 0.01],
-                            "bounciness": 0.0
-                        }
-                    }
-                ]
-            },
-            {
-                "position": [-2, 1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [0, 3, 0],
-                "rotation": [90, 0, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [0, 10, 0],
-                "rotation": [45, 45, 0],
-                "scale": [5, 5, 5],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "sphere",
-                        "material": "moon"
-                    },
-                    {
-                        "type": "Movement",
-                        "angularVelocity": [0, 90, 0]
-                    }
-                ]
             }
+            // {
+            //     "position": [0, 1, 2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         },
+            //         {
+            //             "type": "Rigid Body",
+            //             "rb_type": "Static",
+            //             "collider": {
+            //                 "type": "Box Collider",
+            //                 "halfExtents": [2, 2, 0.01],
+            //                 "bounciness": 0.0
+            //             }
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 1, -2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [2, 1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         },
+            //         {
+            //             "type": "Rigid Body",
+            //             "rb_type": "Static",
+            //             "collider": {
+            //                 "type": "Box Collider",
+            //                 "halfExtents": [2, 2, 0.01],
+            //                 "bounciness": 0.0
+            //             }
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [-2, 1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 3, 0],
+            //     "rotation": [90, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 10, 0],
+            //     "rotation": [45, 45, 0],
+            //     "scale": [5, 5, 5],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "sphere",
+            //             "material": "moon"
+            //         },
+            //         {
+            //             "type": "Movement",
+            //             "angularVelocity": [0, 90, 0]
+            //         }
+            //     ]
+            // }
         ]
     }
 }

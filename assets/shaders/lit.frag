@@ -7,6 +7,8 @@ in Varyings {
     vec3 view;
 } fs_in;
 
+uniform sampler2D tex;
+
 out vec4 frag_color;
 
 void main(){
@@ -27,9 +29,9 @@ void main(){
     vec3 r = reflect(-light_direction, fs_in.normal);
     vec3 light_specular = vec3(1.0, 1.0, 1.0); // White Light
     vec3 material_specular = vec3(0.5, 0.5, 0.5); // Specular Color of the Material
-    float alpha = 32.0; // Shininess of the Material
+    float alpha = 1.0; // Shininess of the Material
     float phong = pow(max(0.0, dot(r,fs_in.view)), alpha);
     vec3 specular = light_specular * material_specular * phong;
 
-    frag_color = vec4(diffuse + ambient + specular , 1.0);
+    frag_color = texture(tex, fs_in.tex_coord) * vec4(diffuse + ambient + specular, 1.0);
 }

@@ -194,8 +194,8 @@ namespace our {
                 command.material->shader->set("M", command.localToWorld);
                 command.material->shader->set("VP", VP);
                 command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
-                r3d::Vector3 camera_position = camera->getOwner()->localTransform.getPosition();
-                command.material->shader->set("camera_position", glm::vec4(camera_position.x, camera_position.y, camera_position.z, 1.0));
+                glm::vec4 camera_position = (camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+                command.material->shader->set("camera_position", glm::vec3(camera_position.x, camera_position.y, camera_position.z));
             } else {
                 glm::mat4 transform = VP * command.localToWorld;
                 command.material->shader->set("transform", transform);
@@ -242,7 +242,7 @@ namespace our {
                 command.material->shader->set("M", command.localToWorld);
                 command.material->shader->set("VP", VP);
                 command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
-                r3d::Vector3 camera_position = camera->getOwner()->localTransform.getPosition();
+                glm::vec4 camera_position = (camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
                 command.material->shader->set("camera_position", glm::vec3(camera_position.x, camera_position.y, camera_position.z));
             } else {
                 glm::mat4 transform = VP * command.localToWorld;
