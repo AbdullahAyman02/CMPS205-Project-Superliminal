@@ -86,5 +86,8 @@ namespace our {
     void LitMaterial::deserialize(const nlohmann::json& data){
         TexturedMaterial::deserialize(data);
         if(!data.is_object()) return;
+        diffuse = data.value("diffuse", glm::vec3(0.2f, 0.2f, 0.2f));
+        specular = data.value("specular", glm::vec3(0.2f, 0.2f, 0.2f));
+        ambient = data.value("ambient", glm::vec3(0.2f, 0.2f, 0.2f));
     }
 }

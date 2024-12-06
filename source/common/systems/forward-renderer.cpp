@@ -5,6 +5,8 @@
 namespace our {
 
     void ForwardRenderer::initialize(glm::ivec2 windowSize, const nlohmann::json& config){
+        this->initialized = false; // We will set this to true when we finish the initialization of the renderer
+        
         // First, we store the window size for later use
         this->windowSize = windowSize;
 
@@ -114,6 +116,40 @@ namespace our {
         }
     }
 
+    // Helper function to set up all the light sources
+    void ForwardRenderer::setupLights(std::vector<LightComponent*> lights, ShaderProgram* shader) {
+        for(int i = 0; i < lights.size(); i++) {
+            LightComponent* light = lights[i];
+            std::string prefix = "lights[" + std::to_string(i) + "].";
+            shader->set(prefix + "type", (int)light->type);
+            shader->set(prefix + "diffuse", light->diffuse);
+            shader->set(prefix + "specular", light->specular);
+            shader->set(prefix + "ambient", light->ambient);
+            switch (light->type) {
+                case LightComponent::Type::DIRECTIONAL:
+                    shader->set(prefix + "direction", glm::normalize(light->direction));
+                    break;
+                case LightComponent::Type::POINT:
+                    shader->set(prefix + "position", light->position);
+                    shader->set(prefix + "attenuation.constant", light->attenuation.constant);
+                    shader->set(prefix + "attenuation.linear", light->attenuation.linear);
+                    shader->set(prefix + "attenuation.quadratic", light->attenuation.quadratic);
+                    break;
+                case LightComponent::Type::SPOT:
+                    shader->set(prefix + "position", light->position);
+                    shader->set(prefix + "direction", glm::normalize(light->direction));
+                    shader->set(prefix + "attenuation.constant", light->attenuation.constant);
+                    shader->set(prefix + "attenuation.linear", light->attenuation.linear);
+                    shader->set(prefix + "attenuation.quadratic", light->attenuation.quadratic);
+                    shader->set(prefix + "color", light->color);
+                    shader->set(prefix + "spot_angle.inner", light->spot_angle.inner);
+                    shader->set(prefix + "spot_angle.outer", light->spot_angle.outer);
+                    break;
+            }
+        }
+        shader->set("lightCount", (int)lights.size());
+    }
+
     void ForwardRenderer::render(World* world){
         // First of all, we search for a camera and for all the mesh renderers
         CameraComponent* camera = nullptr;
@@ -137,6 +173,10 @@ namespace our {
                 // Otherwise, we add it to the opaque command list
                     opaqueCommands.push_back(command);
                 }
+            }
+            // If this entity has a light component
+            if(auto light = entity->getComponent<LightComponent>(); light){
+                lights.push_back(light);
             }
         }
 
@@ -188,9 +228,13 @@ namespace our {
         for(auto command : opaqueCommands){
             // Setup the material
             command.material->setup();
-            
+
             if(dynamic_cast<LitMaterial*>(command.material))
             {
+                if (this->initialized == false) {
+                    setupLights(lights, command.material->shader);
+                }
+
                 command.material->shader->set("M", command.localToWorld);
                 command.material->shader->set("VP", VP);
                 command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
@@ -239,6 +283,10 @@ namespace our {
 
             if(dynamic_cast<LitMaterial*>(command.material))
             {
+                if (this->initialized == false) {
+                    setupLights(lights, command.material->shader);
+                }
+
                 command.material->shader->set("M", command.localToWorld);
                 command.material->shader->set("VP", VP);
                 command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
@@ -262,6 +310,8 @@ namespace our {
             glBindVertexArray(this->postProcessVertexArray);
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
-    }
 
+        // We have finished rendering
+        this->initialized = true;
+    }
 }

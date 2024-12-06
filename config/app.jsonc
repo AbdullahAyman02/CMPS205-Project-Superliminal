@@ -115,8 +115,8 @@
                     "sampler": "default"
                 },
                 "moon":{
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lit",
+                    "shader": "lit",
                     "pipelineState": {
                         "faceCulling":{
                             "enabled": false
@@ -177,8 +177,68 @@
                     }
                 ]
             },
+            // {
+            //     "position": [4, 3, 7],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "cube",
+            //             "material": "metal"
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "color": [1, 1, 1, 1],
+            //             "direction": [0.0, -1.0, 0.0],
+            //             "lightType": 2,
+            //             "constant": 1.0,
+            //             "linear": 0.22,
+            //             "quadratic": 0.20,
+            //             "inner": 15,
+            //             "outer": 30
+
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [-3, 3, 7],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "cube",
+            //             "material": "metal"
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "color": [1, 0, 0, 1],
+            //             "lightType": 1,
+            //             "direction": [0.0, -1.0, 0.0],
+            //             "constant": 1.0,
+            //             "linear": 0.22,
+            //             "quadratic": 0.20
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [4, 3, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "cube",
+            //             "material": "metal"
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "color": [128, 128, 128, 1],
+            //             "diffuse": [1.0, 1.0, 1.0],
+            //             "specular": [1.0, 1.0, 1.0],
+            //             "ambient": [0.1, 0.1, 0.1],
+            //             "lightType": 0,
+            //             "direction": [-1.0, 0.0, 1.0]
+            //         }
+            //     ]
+            // },
             {
-                "position": [0, -1, 0],
+                "position": [0, 3, 0],
                 "rotation": [-45, 0, 0],
                 "components": [
                     {
@@ -188,7 +248,7 @@
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [0, 0.1, 0],
+                        // "linearVelocity": [0, 1, 0],
                         "angularVelocity": [0, 45, 0]
                     }
                 ]
@@ -305,6 +365,21 @@
             //         {
             //             "type": "Movement",
             //             "angularVelocity": [0, 90, 0]
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "lightType": 1,  // 0: directional, 1: point, 2: spot
+            //             "color": [100, 100, 100, 1.0],   // light color
+            //             "diffuse": [1.0, 1.0, 1.0], // light diffuse color
+            //             "specular": [1.0, 1.0, 1.0], // light specular color
+            //             "ambient": [0.1, 0.1, 0.1],  // light ambient color
+            //             "direction": [0, -1, 0],    // light direction
+            //             "position": [0, 12, 1],     // light position
+            //             "constant": 1.0,            // constant attenuation
+            //             "linear": 0.09,             // linear attenuation
+            //             "quadratic": 0.032,         // quadratic attenuation
+            //             "inner": 40,                // inner cone angle
+            //             "outer": 65                 // outer cone angle
             //         }
             //     ]
             // }

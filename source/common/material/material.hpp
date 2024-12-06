@@ -55,6 +55,7 @@ namespace our {
 
     class LitMaterial : public TexturedMaterial {
     public:
+        glm::vec3 diffuse, specular, ambient;
         // albedo, specular, roughness, ambient occlusion, emission
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
