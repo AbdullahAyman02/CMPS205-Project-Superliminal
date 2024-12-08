@@ -177,66 +177,71 @@
                     }
                 ]
             },
-            // {
-            //     "position": [4, 3, 7],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "cube",
-            //             "material": "metal"
-            //         },
-            //         {
-            //             "type": "Light",
-            //             "color": [1, 1, 1, 1],
-            //             "direction": [0.0, -1.0, 0.0],
-            //             "lightType": 2,
-            //             "constant": 1.0,
-            //             "linear": 0.22,
-            //             "quadratic": 0.20,
-            //             "inner": 15,
-            //             "outer": 30
+            {
+                "position": [-4, 3, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "metal"
+                    },
+                    {
+                        "type": "Light",
+                        "color": [1, 1, 1, 1],
+                        "position": [-4, 3, 0],
+                        "direction": [1.0, 0.0, 0.0],
+                        "lightType": 2,
+                        "constant": 0.0,
+                        "linear": 0.0,
+                        "quadratic": 0.001,
+                        "inner": 5,
+                        "outer": 90
 
-            //         }
-            //     ]
-            // },
-            // {
-            //     "position": [-3, 3, 7],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "cube",
-            //             "material": "metal"
-            //         },
-            //         {
-            //             "type": "Light",
-            //             "color": [1, 0, 0, 1],
-            //             "lightType": 1,
-            //             "direction": [0.0, -1.0, 0.0],
-            //             "constant": 1.0,
-            //             "linear": 0.22,
-            //             "quadratic": 0.20
-            //         }
-            //     ]
-            // },
-            // {
-            //     "position": [4, 3, 2],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "cube",
-            //             "material": "metal"
-            //         },
-            //         {
-            //             "type": "Light",
-            //             "color": [128, 128, 128, 1],
-            //             "diffuse": [1.0, 1.0, 1.0],
-            //             "specular": [1.0, 1.0, 1.0],
-            //             "ambient": [0.1, 0.1, 0.1],
-            //             "lightType": 0,
-            //             "direction": [-1.0, 0.0, 1.0]
-            //         }
-            //     ]
-            // },
+                    }
+                ]
+            },
+            {
+                "position": [-3, 3, 7],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "metal"
+                    },
+                    {
+                        "type": "Light",
+                        "color": [1, 1, 1, 1],
+                        "lightType": 1,
+                        "position": [-3, 3, 7],
+                        // "direction": [1.0, 0.0, -1.0],
+                        "diffuse": [1.0, 1.0, 1.0],
+                        "specular": [1.0, 1.0, 1.0],
+                        "ambient": [0.1, 0.1, 0.1],
+                        "constant": 0.0,
+                        "linear": 0.0,
+                        "quadratic": 0.01
+                    }
+                ]
+            },
+            {
+                "position": [4, 3, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "cube",
+                        "material": "metal"
+                    },
+                    {
+                        "type": "Light",
+                        // "color": [128, 128, 128, 1],
+                        "diffuse": [1.0, 1.0, 1.0],
+                        "specular": [1.0, 1.0, 1.0],
+                        "ambient": [1.0, 1.0, 1.0],
+                        "lightType": 0,
+                        "direction": [0.0, 0.0, 0.0]
+                    }
+                ]
+            },
             {
                 "position": [0, 3, 0],
                 "rotation": [-45, 0, 0],

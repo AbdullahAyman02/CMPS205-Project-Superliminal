@@ -81,6 +81,10 @@ namespace our {
 
     void LitMaterial::setup() const {
         TexturedMaterial::setup();
+        shader->set("material.diffuse", diffuse);
+        shader->set("material.specular", specular);
+        shader->set("material.ambient", ambient);
+        shader->set("material.shininess", shininess);
     }
 
     void LitMaterial::deserialize(const nlohmann::json& data){
@@ -89,5 +93,6 @@ namespace our {
         diffuse = data.value("diffuse", glm::vec3(0.2f, 0.2f, 0.2f));
         specular = data.value("specular", glm::vec3(0.2f, 0.2f, 0.2f));
         ambient = data.value("ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+        shininess = data.value("shininess", 10.0f);
     }
 }
