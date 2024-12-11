@@ -4,6 +4,8 @@
 #define POINT 1
 #define SPOT 2
 
+#define MAX_LIGHTS 10
+
 in Varyings {
     vec4 color;
     vec2 tex_coord;
@@ -56,7 +58,7 @@ struct Material {
 };
 
 // Receive the material and the light as uniforms.
-uniform Light lights[10];    // Maximum of 10 lights
+uniform Light lights[MAX_LIGHTS];    // Maximum of 10 lights
 uniform Material material;
 uniform int lightCount;
 
@@ -76,13 +78,12 @@ void main(){
     vec3 normal = normalize(fs_in.normal);
     vec3 view = normalize(fs_in.view);
 
+    int count = min(lightCount, MAX_LIGHTS);
+
     vec3 accumulated_light = vec3(0.0f, 0.0f, 0.0f);
     for (int i = 0; i < lightCount; i++) {
 
         vec3 light_direction;
-        vec3 diffuse;
-        vec3 ambient;
-        vec3 specular;
         float attenuation = 1.0f;
 
         if(lights[i].type == DIRECTIONAL){
@@ -108,39 +109,12 @@ void main(){
             }
         }
 
-        vec3 reflected = reflect(light_direction, normal);
-        float lambert = calculate_lambert(normal, light_direction);
-        float phong = calculate_phong(normal, light_direction, view, material.shininess);
-
-        diffuse = lights[i].diffuse * material.diffuse * lambert;
-        ambient = lights[i].ambient * material.ambient;
-        specular = lights[i].specular * material.specular * phong;
+        vec3 diffuse = lights[i].diffuse * material.diffuse * calculate_lambert(normal, light_direction);
+        vec3 ambient = lights[i].ambient * material.ambient;
+        vec3 specular = lights[i].specular * material.specular * calculate_phong(normal, light_direction, view, material.shininess);
 
         accumulated_light += attenuation * (diffuse + specular) + ambient;
 
-        // vec3 light_direction = vec3(0.0, -1.0, 0.0);
-        // // Diffuse Component [Diffuse = Kd * Id * Max(0,l.n) ]
-        // float lambert = max(0.0,dot(fs_in.normal, light_direction)); // Lambert's Cosine Law
-        // vec3 light_diffuse = vec3(1.0, 1.0, 1.0); // White Light
-        // vec3 material_diffuse = vec3(0.2, 0.2, 0.2); // Diffuse Color of the Material
-        // vec3 diffuse = light_diffuse * material_diffuse * lambert;
-
-        // // Ambient Component [Ambient = Ka * Ia]
-        // vec3 light_ambient = vec3(0.1, 0.1, 0.1); // Ambient Light Intensity
-        // vec3 material_ambient = vec3(0.2, 0.2, 0.2); // Ambient Color of the Material
-        // vec3 ambient = light_ambient * material_ambient;
-
-        // // Specular Component [Specular = Ks * Is * Max(0, (r.v))^alpha]
-        // vec3 r = reflect(-light_direction, fs_in.normal);
-        // vec3 light_specular = vec3(1.0, 1.0, 1.0); // White Light
-        // vec3 material_specular = vec3(0.2, 0.2, 0.2); // Specular Color of the Material
-        // float alpha = 10.0; // Shininess of the Material
-        // float phong = pow(max(0.0, dot(r,fs_in.view)), alpha);
-        // vec3 specular = light_specular * material_specular * phong;
-
-        // vec4 light_color = vec4((diffuse + specular + ambient), 1.0);
-        frag_color = texture(tex, fs_in.tex_coord) * vec4(accumulated_light, 1.0f);
-        // frag_color = fs_in.color * vec4(accumulated_light, 1.0f);
-        // frag_color = vec4(1.0f, 1.0f, 1.0f, 1.0f) * vec4(accumulated_light, 1.0f);
     }
+    frag_color = fs_in.color * vec4(accumulated_light, 1.0f);
 }
