@@ -53,11 +53,19 @@ namespace our {
         void deserialize(const nlohmann::json& data) override;
     };
 
-    class LitMaterial : public TexturedMaterial {
+    class LitMaterial : public TintedMaterial {
     public:
-        glm::vec3 diffuse, specular, ambient;
-        float shininess;
-        // albedo, specular, roughness, ambient occlusion, emission
+        Sampler* sampler; 
+        Texture2D* albedo;
+        glm::vec3 albedo_tint;
+        Texture2D* specular;
+        glm::vec3 specular_tint;
+        Texture2D* roughness;
+        glm::vec2 roughness_range;
+        Texture2D* ambient_occlusion;
+        Texture2D* emission;
+        glm::vec3 emission_tint;
+
         void setup() const override;
         void deserialize(const nlohmann::json& data) override;
     };

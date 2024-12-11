@@ -20,6 +20,8 @@ namespace our {
             SPOT
         } type = Type::DIRECTIONAL;
 
+        glm::vec3 color;
+
         // We also define the color & intensity of the light for each component of the Phong model (Ambient, Diffuse, Specular).
         glm::vec3 diffuse, specular, ambient;
         glm::vec3 position; // Used for Point and Spot Lights only
@@ -30,8 +32,6 @@ namespace our {
         struct {
             float constant, linear, quadratic;
         } attenuation; // Used for Point and Spot Lights only
-
-        glm::vec4 color; // Used for Spot Lights only
 
         // This specifies the inner and outer cone of the spot light.
         // The light power is 0 outside the outer cone, the light power is full inside the inner cone.

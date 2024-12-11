@@ -34,7 +34,14 @@
                 "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
-                "monkey": "assets/textures/monkey.png"
+                "monkey": "assets/textures/monkey.png",
+
+                "house": "assets/textures/house.jpg",
+                "house_albedo": "assets/textures/house_albedo.jpg",
+                "house_specular": "assets/textures/house_specular.jpg",
+                "house_ambient_occlusion": "assets/textures/house_ambient_occlusion.jpg",
+                "house_roughness": "assets/textures/house_roughness.jpg",
+                "house_emissive": "assets/textures/house_emissive.jpg"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
@@ -100,8 +107,10 @@
                     "sampler": "default"
                 },
                 "monkey":{
+                    // "type": "textured",
                     "type": "lit",
                     "shader": "lit",
+                    // "shader": "textured",
                     "pipelineState": {
                         "faceCulling":{
                             "enabled": false
@@ -111,12 +120,22 @@
                         }
                     },
                     "tint": [1, 1, 1, 1],
-                    "texture": "monkey",
-                    "sampler": "default"
+                    // "texture": "monkey",
+                    "texture": "house",
+                    "sampler": "default",
+                    "albedo": "house_albedo",
+                    // "albedo_tint": [1, 1, 1],
+                    "specular": "house_specular",
+                    // "specular_tint": [1, 1, 1],
+                    "ambient_occlusion": "house_ambient_occlusion",
+                    "roughness": "house_roughness",
+                    // "roughness_range": [0.0, 1.0],
+                    "emissive": "house_emissive"
+                    // "emissive_tint": [1, 1, 1]
                 },
                 "moon":{
-                    "type": "lit",
-                    "shader": "lit",
+                    "type": "textured",
+                    "shader": "textured",
                     "pipelineState": {
                         "faceCulling":{
                             "enabled": false
@@ -187,8 +206,8 @@
                     },
                     {
                         "type": "Light",
-                        "color": [1, 1, 1, 1],
-                        "position": [-4, 3, 0],
+                        "color": [0, 0, 1],
+                        // "position": [-4, 3, 0],
                         "direction": [1.0, 0.0, 0.0],
                         "lightType": 2,
                         "constant": 0.0,
@@ -210,9 +229,9 @@
                     },
                     {
                         "type": "Light",
-                        "color": [1, 1, 1, 1],
+                        "color": [1, 0, 0],
                         "lightType": 1,
-                        "position": [-3, 3, 7],
+                        // "position": [-3, 3, 7],
                         // "direction": [1.0, 0.0, -1.0],
                         "diffuse": [1.0, 1.0, 1.0],
                         "specular": [1.0, 1.0, 1.0],
@@ -233,7 +252,7 @@
                     },
                     {
                         "type": "Light",
-                        // "color": [128, 128, 128, 1],
+                        "color": [1, 1, 1],
                         "diffuse": [1.0, 1.0, 1.0],
                         "specular": [1.0, 1.0, 1.0],
                         "ambient": [1.0, 1.0, 1.0],

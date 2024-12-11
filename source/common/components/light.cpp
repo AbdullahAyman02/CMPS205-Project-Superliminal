@@ -13,7 +13,7 @@ namespace our {
             case 2: this->type = Type::SPOT; break;
         }
 
-        this->color = data.value("color", glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+        this->color = data.value("color", glm::vec3(0.0f, 0.0f, 0.0f));
 
         this->diffuse = data.value("diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
         this->specular = data.value("specular", glm::vec3(1.0f, 1.0f, 1.0f));
