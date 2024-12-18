@@ -86,7 +86,7 @@ namespace our
                 if (rigidBody)
                 {
                     r3d::Transform transform = rigidBody->getRigidBody()->getTransform();
-                    transform.setPosition(transform.getPosition() - rigidBody->relativePosition);
+                    transform.setPosition(transform.getPosition() + rigidBody->relativePosition);
 
                     FreeCameraControllerComponent *controller = entity->getComponent<FreeCameraControllerComponent>();
                     if (controller)
