@@ -2,7 +2,7 @@
 
 #include "../ecs/component.hpp"
 #include "../deserialize-utils.hpp"
-#include "../ecs/entity.hpp"
+// #include "../ecs/entity.hpp"
 #include "../ecs/world.hpp"
 
 #include <reactphysics3d/reactphysics3d.h>

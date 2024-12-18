@@ -640,8 +640,9 @@
             },
             // Toy block
             {
-               "position": [0, -1, 0],
-                "rotation": [0, 90, 0],
+                "name": "Cube",
+               "position": [3, -0.5, 0],
+                "rotation": [0, 0, 0],
                 "scale": [5, 5, 5],
                 "components": [
                     {
@@ -652,13 +653,13 @@
                     {
                         "type": "Rigid Body",
                         "rb_type": "Dynamic",
-                        // "collider": {
-                        //     "type": "Box Collider",
-                        //     "halfExtents": [1, 1, 1],
-                        //     "bounciness": 0.0
-                        // },
-                        "relativePosition": [0, 0, 0],
-                        "enableGravity": false
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [0.25, 0.25, 0.25],
+                            "bounciness": 0.2
+                        },
+                        // "relativePosition": [0, -1, 0]
+                        "enableGravity": true
                     }
                 ]
             },
@@ -675,20 +676,22 @@
                     },
                     {
                         "type": "Rigid Body",
-                        "rb_type": "Dynamic",
+                        "rb_type": "Dynamic"
                         // "collider": {
                         //     "type": "Box Collider",
-                        //     "halfExtents": [1, 1, 1],
+                        //     "halfExtents": [0.1, 0.1, 0.1],
                         //     "bounciness": 0.0
                         // },
-                        "enableGravity": false
+                        // "enableGravity": true
                     }
                 ],
                 "children": [
                     {
+                        "name": "Button",
                         "position": [0, 0, 0],
-                        "rotation": [0, 90, 0],
+                        "rotation": [0, 0, 0],
                         "scale": [1, 1, 1],
+                        // "motionAxis": [0, 1, 0],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
@@ -698,12 +701,13 @@
                             {
                                 "type": "Rigid Body",
                                 "rb_type": "Dynamic",
-                                // "collider": {
-                                //     "type": "Box Collider",
-                                //     "halfExtents": [1, 1, 1],
-                                //     "bounciness": 0.0
-                                // },
-                                "enableGravity": false
+                                "relativePosition": [0, -1, 0],
+                                "collider": {
+                                    "type": "Box Collider",
+                                    "halfExtents": [0.5, 0.1, 0.5],
+                                    "bounciness": 0.0
+                                },
+                                "enableGravity": true
                             }
                         ]
                     }
