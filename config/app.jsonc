@@ -194,7 +194,7 @@
         },
         "world":[
             {
-                "position": [0, 0, 0],
+                "position": [2, 0, 0],
                 "components": [
                     {
                         "type": "Camera"
@@ -222,6 +222,26 @@
                 ]
             },{
                 "position": [0, -1, 0],
+                "rotation": [-90, 0, 0],
+                "scale": [5, 5, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "metal"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [5, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-10, -1, 0],
                 "rotation": [-90, 0, 0],
                 "scale": [5, 5, 1],
                 "components": [
@@ -743,7 +763,7 @@
                         "rb_type": "Static",
                         "collider": {
                             "type": "Box Collider",
-                            "halfExtents": [1, 5, 0.1],
+                            "halfExtents": [1, 0, 0.1],
                             "bounciness": 0.0
                         }
                     }
@@ -790,6 +810,433 @@
                 ]
             },{
                 "position": [-5, 2, 4.5],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },
+            // Chamber walls 5
+            {
+                "position": [-6, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-7.5, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-9, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-10.5, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-12, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-13.5, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, -5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },
+            // Chamber walls 6
+            {
+                "position": [-6, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-7.5, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-9, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-10.5, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-12, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-13.5, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, 5],
+                "rotation": [0, 0, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },
+            // Chamber walls 7
+            {
+                "position": [-15, 2, -4.5],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },
+            {
+                "position": [-15, 2, -3],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, -1.5],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, 0],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, 1.5],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, 3],
+                "rotation": [0, 90, 0],
+                "scale": [0.95, 1, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "chamber_wall",
+                        "material": "chamber_wall"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [1, 5, 0.1],
+                            "bounciness": 0.0
+                        }
+                    }
+                ]
+            },{
+                "position": [-15, 2, 4.5],
                 "rotation": [0, 90, 0],
                 "scale": [0.95, 1, 1],
                 "components": [
@@ -874,29 +1321,42 @@
                         "enableGravity": true
                     }
                 ]
-            },{
-                "position": [-5, -1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [1.2, 1.0, 1.2],
+            },
+            // {
+            //     "position": [-5, -1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [1.2, 1.0, 1.2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "door",
+            //             "material": "door"
+            //         },
+            //         {
+            //             "type": "Rigid Body",
+            //             "rb_type": "Static",
+            //             "collider": {
+            //                 "type": "Box Collider",
+            //                 "halfExtents": [1, 1, 0.5],
+            //                 "bounciness": 0.0
+            //             }
+            //             // "enableGravity": true
+            //         }
+            //     ]
+            // },
+            {
+                "position": [0, 5, 0],
+                "rotation": [90, 0, 0],
+                "scale": [5, 5, 5],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "door",
-                        "material": "door"
-                    },
-                    {
-                        "type": "Rigid Body",
-                        "rb_type": "Static",
-                        "collider": {
-                            "type": "Box Collider",
-                            "halfExtents": [1, 1, 0.5],
-                            "bounciness": 0.0
-                        }
-                        // "enableGravity": true
+                        "mesh": "plane",
+                        "material": "ceiling"
                     }
                 ]
             },{
-                "position": [0, 5, 0],
+                "position": [-10, 5, 0],
                 "rotation": [90, 0, 0],
                 "scale": [5, 5, 5],
                 "components": [
