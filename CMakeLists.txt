@@ -84,6 +84,8 @@ set(COMMON_SOURCES
         source/common/components/rigid-body.hpp
         source/common/components/rigid-body.cpp
 
+        source/common/global/global.hpp
+
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp
         source/common/systems/free-camera-controller.hpp
