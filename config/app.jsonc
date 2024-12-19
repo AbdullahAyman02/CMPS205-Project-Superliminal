@@ -127,15 +127,35 @@
                 }
             }
         },
+        "physicsWorld": {
+            "gravity": [0, -5, 0]
+        },
         "world":[
             {
-                "position": [0, 0, 10],
+                "position": [0, 5, 10],
                 "components": [
                     {
                         "type": "Camera"
                     },
                     {
                         "type": "Free Camera Controller"
+                    },
+                    {
+                        "type": "Rigid Body",       // rigid body component for the player to allow collisions and physics interactions
+                        "rb_type": "Dynamic",       // static body for the floor, a kinematic body for a moving platform and a dynamic body for a rock that could fall on the floor.
+                        "enableGravity": true,      // enable gravity for the player (default is true)
+                        "allowedToSleep": false,    // sleeping technique is used to disable the simulation of resting bodies.
+                        "rotationAxis": [1, 1, 1],
+                        "motionAxis": [1, 1, 1],
+                        "relativePosition": [0, 1, 0],
+                        "collider": {
+                            "type": "Capsule Collider",
+                            "radius": 0.5,
+                            "height": 2.0,
+                            "bounciness": 0.0,
+                            "friction": 1.0,
+                            "isTrigger": false              // is the collider a trigger (default is false)
+                        }
                     }
                 ],
                 "children": [
@@ -177,6 +197,15 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "grass"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [10, 10, 1],
+                            "bounciness": 0.0
+                        }
                     }
                 ]
             },
@@ -189,6 +218,15 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "glass"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [2, 2, 0.01],
+                            "bounciness": 0.0
+                        }
                     }
                 ]
             },
@@ -213,6 +251,15 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "glass"
+                    },
+                    {
+                        "type": "Rigid Body",
+                        "rb_type": "Static",
+                        "collider": {
+                            "type": "Box Collider",
+                            "halfExtents": [2, 2, 0.01],
+                            "bounciness": 0.0
+                        }
                     }
                 ]
             },
