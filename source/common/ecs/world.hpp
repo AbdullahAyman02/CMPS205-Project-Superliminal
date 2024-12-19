@@ -142,6 +142,7 @@ namespace our
 
                     void *userData = body1->getUserData();
                     Entity *button = static_cast<Entity *>(userData);
+                    World* world = button->getWorld();
 
                     // Handle button press
                     for (uint32_t j = 0; j < pair.getNbContactPoints(); j++)
@@ -152,7 +153,7 @@ namespace our
                         if (abs(normal.y) > 0.9f)
                         {
                             button->lastContactTime = getMyGameTime();
-                            printf("Button pressed at %f\n", button->lastContactTime);
+                            // printf("Button pressed at %f\n", button->lastContactTime);
 
                             if (button->delta < 0.2f)
                             {
@@ -161,6 +162,14 @@ namespace our
                                 button->localTransform.setPosition(glm::vec3(position.x, position.y - 0.01f, position.z));
                                 body1->setTransform(r3d::Transform(r3d::Vector3(position.x, position.y - 0.01f, position.z), body1->getTransform().getOrientation()));
                                 button->delta += 0.01f;
+
+                                for (auto entity : world->getEntities())
+                                {
+                                    if (entity->name == "Cube")
+                                    {
+                                        entity->moveCube();
+                                    }
+                                }
                             }
                         }
                     }

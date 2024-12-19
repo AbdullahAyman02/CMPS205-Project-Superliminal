@@ -110,6 +110,18 @@ namespace our {
             }
         }
 
+        void moveCube()
+        {
+            for(auto component : components)
+            {
+                if(component->getName() == "Rigid Body")
+                {
+                    component->moveCube();
+                    break;
+                }
+            }
+        }
+
         // Since the entity owns its components, they should be deleted alongside the entity
         ~Entity(){
             //TODO: (Req 8) Delete all the components in "components".
