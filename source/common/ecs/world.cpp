@@ -46,7 +46,7 @@ namespace our
         physicsWorld = physicsCommon.createPhysicsWorld(settings);
 
         // Add the button contact listener
-        // ButtonContactListener *listener = new ButtonContactListener();
-        // physicsWorld->setEventListener(listener);
+        ButtonContactListener *listener = new ButtonContactListener();
+        physicsWorld->setEventListener(listener);
     }
 }

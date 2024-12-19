@@ -190,7 +190,7 @@
             }
         },
         "physicsWorld": {
-            "gravity": [0, -5, 0]
+            "gravity": [0, -9.81, 0]
         },
         "world":[
             {
@@ -851,7 +851,7 @@
                     }
                 ]
             },{
-                "name": "Button",
+                "name": "Button 7ooda",
                 "position": [1, -0.8, 0],
                 "rotation": [0, 0, 0],
                 "scale": [1, 1, 1],

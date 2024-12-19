@@ -82,7 +82,7 @@ set(COMMON_SOURCES
         source/common/components/rigid-body.hpp
         source/common/components/rigid-body.cpp
 
-        # source/common/events/button-event-listener.hpp
+        source/common/global/global.hpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp

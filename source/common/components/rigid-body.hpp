@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../ecs/world.hpp"
 #include "../ecs/component.hpp"
 #include "../deserialize-utils.hpp"
-// #include "../ecs/entity.hpp"
-#include "../ecs/world.hpp"
+#include "../ecs/entity.hpp"
 
 #include <reactphysics3d/reactphysics3d.h>
 namespace r3d = reactphysics3d;
