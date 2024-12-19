@@ -23,6 +23,10 @@
                 "textured":{
                     "vs":"assets/shaders/textured.vert",
                     "fs":"assets/shaders/textured.frag"
+                },
+                "lit":{
+                    "vs":"assets/shaders/lit.vert",
+                    "fs":"assets/shaders/lit.frag"
                 }
             },
             "textures":{
@@ -31,6 +35,13 @@
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png",
+
+                "house": "assets/textures/house.jpg",
+                "house_albedo": "assets/textures/house_albedo.jpg",
+                "house_specular": "assets/textures/house_specular.jpg",
+                "house_ambient_occlusion": "assets/textures/house_ambient_occlusion.jpg",
+                "house_roughness": "assets/textures/house_roughness.jpg",
+                "house_emissive": "assets/textures/house_emissive.jpg",
                 "floor": "assets/textures/metal_floor_back.png",
                 "chamber_wall": "assets/textures/chamber_wall_panel.png",
                 "toy_block": "assets/textures/toy_block.png",
@@ -119,6 +130,19 @@
                             "enabled": true
                         }
                     },
+                    "tint": [1, 1, 1, 1],
+                    // "texture": "monkey",
+                    // "texture": "house",
+                    // "sampler": "default",
+                    // "albedo": "house_albedo",
+                    // "albedo_tint": [1, 1, 1],
+                    // "specular": "house_specular",
+                    // "specular_tint": [1, 1, 1],
+                    // "ambient_occlusion": "house_ambient_occlusion",
+                    // "roughness": "house_roughness",
+                    // "roughness_range": [0.0, 1.0],
+                    // "emissive": "house_emissive"
+                    // "emissive_tint": [1, 1, 1]
                     "texture": "chamber_wall",
                     "sampler": "repeated"
                 },
@@ -205,7 +229,7 @@
                     {
                         "type": "Rigid Body",       // rigid body component for the player to allow collisions and physics interactions
                         "rb_type": "Dynamic",       // static body for the floor, a kinematic body for a moving platform and a dynamic body for a rock that could fall on the floor.
-                        "enableGravity": true,      // enable gravity for the player (default is true)
+                        "enableGravity": false,      // enable gravity for the player (default is true)
                         "allowedToSleep": false,    // sleeping technique is used to disable the simulation of resting bodies.
                         "rotationAxis": [1, 1, 1],
                         "motionAxis": [1, 1, 1],
@@ -220,7 +244,73 @@
                         }
                     }
                 ]
-            },{
+            },
+            // {
+            //     "position": [-4, 3, 0],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "cube",
+            //             "material": "metal"
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "color": [0, 0, 1],
+            //             // "position": [-4, 3, 0],
+            //             "direction": [1.0, 0.0, 0.0],
+            //             "lightType": 2,
+            //             "constant": 0.0,
+            //             "linear": 0.0,
+            //             "quadratic": 0.001,
+            //             "inner": 5,
+            //             "outer": 90
+
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [-3, 3, 7],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "cube",
+            //             "material": "metal"
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "color": [1, 0, 0],
+            //             "lightType": 1,
+            //             // "position": [-3, 3, 7],
+            //             // "direction": [1.0, 0.0, -1.0],
+            //             "diffuse": [1.0, 1.0, 1.0],
+            //             "specular": [1.0, 1.0, 1.0],
+            //             "ambient": [0.1, 0.1, 0.1],
+            //             "constant": 0.0,
+            //             "linear": 0.0,
+            //             "quadratic": 0.01
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [4, 3, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "cube",
+            //             "material": "metal"
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "color": [1, 1, 1],
+            //             "diffuse": [1.0, 1.0, 1.0],
+            //             "specular": [1.0, 1.0, 1.0],
+            //             "ambient": [1.0, 1.0, 1.0],
+            //             "lightType": 0,
+            //             "direction": [0.0, 0.0, 0.0]
+            //         }
+            //     ]
+            // },
+            {
                 "position": [0, -1, 0],
                 "rotation": [-90, 0, 0],
                 "scale": [5, 5, 1],
@@ -1367,6 +1457,115 @@
                     }
                 ]
             }
+            // {
+            //     "position": [0, 1, 2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         },
+            //         {
+            //             "type": "Rigid Body",
+            //             "rb_type": "Static",
+            //             "collider": {
+            //                 "type": "Box Collider",
+            //                 "halfExtents": [2, 2, 0.01],
+            //                 "bounciness": 0.0
+            //             }
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 1, -2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [2, 1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         },
+            //         {
+            //             "type": "Rigid Body",
+            //             "rb_type": "Static",
+            //             "collider": {
+            //                 "type": "Box Collider",
+            //                 "halfExtents": [2, 2, 0.01],
+            //                 "bounciness": 0.0
+            //             }
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [-2, 1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 3, 0],
+            //     "rotation": [90, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 10, 0],
+            //     "rotation": [45, 45, 0],
+            //     "scale": [5, 5, 5],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "sphere",
+            //             "material": "moon"
+            //         },
+            //         {
+            //             "type": "Movement",
+            //             "angularVelocity": [0, 90, 0]
+            //         },
+            //         {
+            //             "type": "Light",
+            //             "lightType": 1,  // 0: directional, 1: point, 2: spot
+            //             "color": [100, 100, 100, 1.0],   // light color
+            //             "diffuse": [1.0, 1.0, 1.0], // light diffuse color
+            //             "specular": [1.0, 1.0, 1.0], // light specular color
+            //             "ambient": [0.1, 0.1, 0.1],  // light ambient color
+            //             "direction": [0, -1, 0],    // light direction
+            //             "position": [0, 12, 1],     // light position
+            //             "constant": 1.0,            // constant attenuation
+            //             "linear": 0.09,             // linear attenuation
+            //             "quadratic": 0.032,         // quadratic attenuation
+            //             "inner": 40,                // inner cone angle
+            //             "outer": 65                 // outer cone angle
+            //         }
+            //     ]
+            // }
         ]
     }
 }
