@@ -853,7 +853,7 @@
                         "rb_type": "Static",
                         "collider": {
                             "type": "Box Collider",
-                            "halfExtents": [1, 0, 0.1],
+                            "halfExtents": [1, 0.1, 0.1],
                             "bounciness": 0.0
                         }
                     }
